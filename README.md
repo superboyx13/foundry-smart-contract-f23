@@ -1,66 +1,92 @@
-## Foundry
+🚀 Foundry Fund Me
+A smart contract project using Foundry, designed for decentralized funding and testing on zkSync and Sepolia.
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+🛠 Getting Started
+🔧 Requirements
+Git
 
-Foundry consists of:
+git --version
+# Expected: git version x.x.x
+Foundry
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+forge --version
+# Expected: forge 0.2.0 (816e00b 2023-03-16T00:05:26.396218Z)
+⚡ Quickstart
+git clone https://github.com/superboyx13/foundry-smart-contract-f23
+cd foundry-fund-me-f23
+make
+💻 Optional: Use Gitpod
+Don't want to install locally? Use Gitpod to launch in a dev environment instantly.
 
-## Documentation
+Open in Gitpod
 
-https://book.getfoundry.sh/
+📦 Usage
+🔁 Deploy
+forge script script/DeployRaffle.s.sol
+✅ Testing
+We cover 4 test tiers:
 
-## Usage
+Unit
+Integration
+Forked ✅
+Staging ✅
+Run tests:
 
-### Build
+forge test
+Run specific test:
 
-```shell
-$ forge build
-```
+forge test --match-test testFunctionName
+Test coverage:
 
-### Test
+forge coverage
+🌐 Local zkSync Setup
+🧩 Additional Requirements
+foundry-zksync
 
-```shell
-$ forge test
-```
+forge --version
+# Expected: forge 0.0.2 (zkSync)
+Node + npm + npx
 
-### Format
+npm --version   # e.g., 7.24.0
+npx --version   # e.g., 8.1.0
+Docker
 
-```shell
-$ forge fmt
-```
+docker --version   # e.g., Docker version 20.10.7
+docker --info      # Should show `Context: default`
+🧪 Start zkSync Local Node
+npx zksync-cli dev config
+# Choose: In memory node, no additional modules
 
-### Gas Snapshots
+npx zksync-cli dev start
+Expected output:
 
-```shell
-$ forge snapshot
-```
+In memory node started v0.1.0-alpha.22
+Chain ID: 260
+RPC URL: http://127.0.0.1:8011
+Reference: zkSync Rich Accounts
 
-### Anvil
+🚀 Deploy to zkSync Local Node
+make deploy-zk
+🔐 Deployment to Sepolia Testnet
+🧾 Environment Variables
+Create a .env file (see .env.example) and define:
 
-```shell
-$ anvil
-```
+PRIVATE_KEY=your_private_key   # Don't use a key with real funds
+SEPOLIA_RPC_URL=https://your-sepolia-node-url
+ETHERSCAN_API_KEY=your_key     # Optional
+Get testnet ETH: Chainlink Faucets
 
-### Deploy
+🛰 Deploy to Sepolia
+forge script script/DeployFundMe.s.sol \
+  --rpc-url $SEPOLIA_RPC_URL \
+  --private-key $PRIVATE_KEY \
+  --broadcast \
+  --verify \
+  --etherscan-api-key $ETHERSCAN_API_KEY
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+⛽ Estimate Gas
+forge snapshot
+Output: .gas-snapshot file with cost estimates.
 
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+🎨 Formatting
+forge fmt
