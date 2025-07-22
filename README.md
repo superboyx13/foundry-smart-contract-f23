@@ -1,4 +1,5 @@
-🚀 Foundry Fund Me
+🚀 Foundry Lottery Smart Contract
+
 A smart contract project using Foundry, designed for decentralized funding and testing on zkSync and Sepolia.
 
 🛠 Getting Started
